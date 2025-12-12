@@ -11,7 +11,7 @@ const userRoute=require('./routes/user');
 const blogRoute=require('./routes/blog');
 
 const app=express();
-const PORT=process.env.PORT;
+const PORT=process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGO_URL)
 .then(e=> console.log("mongoDB is connected"));
@@ -43,5 +43,8 @@ app.get("/",async (req,res)=>{
 app.use("/users",userRoute);
 app.use("/blog",blogRoute);
 
-app.listen(PORT,()=>{console.log(`Server is running on http://localhost:${PORT}`);});
+// Change this line:
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
